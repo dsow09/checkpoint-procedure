@@ -1,0 +1,66 @@
+PROCEDURE dot_product(VAR v1, v2: ARRAY_OF FLOAT)
+VAR
+    ps : FLOAT := 0;
+    i, j : INTEGER;
+BEGIN
+    FOR i FROM 0 TO v1.length - 1 STEP step  DO
+        FOR j FROM i TO v2.length - 1 STEP step  DO
+            ps := ps +  v1[i] * v2[j];
+            BREAK;
+        END_FOR
+    END_FOR
+    
+    IF (ps == 0) THEN
+        Write("Les deux vecteurs sont orthogonaux !");
+    ELSE
+        Write("Les deux vecteurs ne sont pas orthogonaux !");
+    END_IF
+
+END
+
+ALGORITHM scalaire
+VAR
+    n, i : INTEGER;
+    v1, v2 : ARRAY_OF FLOAT[n];
+
+BEGIN
+    REPEAT
+        Write("Donnez la taille des vecteurs [entre 1 et 5]");
+        read(n);
+    UNTIL (n < 1 || n > 5);
+
+    Write("Veuillez saisir les élèments du premier vecteur !");
+    FOR i FROM 0 TO n - 1 STEP step  DO
+        Write("Element "+(i+1));
+        read(v1[i]);
+    END_FOR
+
+    Write("Veuillez saisir les élèments du second vecteur !");
+    FOR i FROM 0 TO n - 1 STEP step  DO
+        Write("Element "+(i+1));
+        read(v2[i]);
+    END_FOR
+
+    //Utilisation de la Procédure
+    dot_product(v1,v2);
+
+    //Utilisation de la fonction
+    IF (dot_product2(v1, v2) == 0) THEN
+        Write("Les deux vecteurs sont orthogonaux !");
+    ELSE
+        Write("Les deux vecteurs ne sont pas orthogonaux !");
+    END_IF
+END
+
+FUNCTION dot_product2(v1,v2: ARRAY_OF FLOAT) : FLOAT
+VAR
+    ps: FLOAT := 0;
+    i: INTEGER;
+BEGIN
+
+    FOR i FROM 0 TO v1.length - 1 STEP step  DO
+        ps := ps + v1[i] * v2[i];
+    END_FOR
+
+    RETURN ps;
+END
